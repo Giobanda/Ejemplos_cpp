@@ -23,12 +23,18 @@ Calentador::Calentador() //codigo del constructor
 
 void Calentador::calentar()
 {
-    Temperatura+=5;
+    if(Temperatura+Incremento<=30)
+    {
+    Temperatura+=Incremento;
+    }
 }
 
 void Calentador::enfriar()
 {
-    Temperatura-=5;   
+    if(Temperatura+Incremento>=-10)
+    {
+        Temperatura-=Incremento;   
+    }
 }
 
 int main()
@@ -36,11 +42,13 @@ int main()
     Calentador c1;
     Calentador c2;
     
+    for(int i=0;i<10;i++){
     c1.calentar();
-    c1.imprimeTemperatura();
+    c1.imprimeTemperatura();}
     
+    for(int i=0;i<10;i++){
     c2.enfriar();
-    c2.imprimeTemperatura();
+    c2.imprimeTemperatura();}
 }
 
 void Calentador::imprimeTemperatura()
@@ -48,7 +56,7 @@ void Calentador::imprimeTemperatura()
     std::cout<<"La temperatura es: "<<Temperatura<<std::endl;
 }
 
-void Calentador:accedeTemperatura() const
+int Calentador::accedeTemperatura() const
 {
     return Temperatura;
 }
