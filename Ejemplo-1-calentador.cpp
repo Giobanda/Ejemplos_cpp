@@ -1,13 +1,18 @@
-#include  <iostream>
+
+//cppp references referencias a c++
+
+#include  <iostream> 
 
 class Calentador 
 {
     private: 
     int Temperatura;
     int Incremento;
+    int min;
+    int max;
     
     public:
-        Calentador();  // constructor
+        Calentador(int min,int max,int Temperatura);  // constructor
         void calentar();
         void enfriar();
         void imprimeCentigrados() const;
@@ -16,15 +21,28 @@ class Calentador
     
 }; //punto y coma obkigatorio
 
-Calentador::Calentador() //codigo del constructor
+Calentador::Calentador(int min,int max,int Temperatura=0) //codigo del constructor
 {
-    Temperatura=15;
+    if(Temperatura>=min&& Temperatura<=max){
+        this->Temperatura=Temperatura;}
+    else{
+        this->Temperatura=min;}
     Incremento=3;
+    if(min<max)
+    {
+      std::cout<<"Error en el programa"<<std::endl;
+       std::exit(EXIT_FAILURE);
+      // throw"Error en el rango min-max;
+       
+    }
+    
+     this->min=min;
+    this->max=max;
 }
 
 void Calentador::calentar()
 {
-    if(Temperatura+Incremento<=30)
+    if(Temperatura+Incremento<=this->max)
     {
     Temperatura+=Incremento;
     }
@@ -32,7 +50,7 @@ void Calentador::calentar()
 
 void Calentador::enfriar()
 {
-    if(Temperatura+Incremento>=-10)
+    if(Temperatura-Incremento>=-this->min)
     {
         Temperatura-=Incremento;   
     }
@@ -40,18 +58,22 @@ void Calentador::enfriar()
 
 int main()
 {
-    Calentador c1;
-    Calentador c2;
+    //try
+    //{
+        Calentador c1{-10,10};
+        Calentador c2{0,30,-10};
     
    
-    c1.calentar();
-    c1.imprimeCentigrados();
-    c1.imprimeFarenheit();
+        c1.calentar();
+        c1.imprimeCentigrados();
+        c1.imprimeFarenheit();
     
     
-    c2.enfriar();
-    c2.imprimeCentigrados();
-    c2.imprimeFarenheit();
+        c2.enfriar();
+        c2.imprimeCentigrados();
+        c2.imprimeFarenheit();
+        
+    //} //catch(const std::runtime_error &e);
 }
 
 void Calentador::imprimeCentigrados() const
