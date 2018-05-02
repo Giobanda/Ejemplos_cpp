@@ -13,11 +13,12 @@ class Calentador
     
     public:
         Calentador(int min,int max,int Temperatura);  // constructor
-        void calentar();
+        void operator++();
         void enfriar();
         void imprimeCentigrados() const;
         int accedeTemperatura() const;
         void imprimeFarenheit() const;
+        bool operator==(Calentador otro); //sobrecarga miembro de la clase
     
 }; //punto y coma obkigatorio
 
@@ -28,7 +29,7 @@ Calentador::Calentador(int min,int max,int Temperatura=0) //codigo del construct
     else{
         this->Temperatura=min;}
     Incremento=3;
-    if(min<max)
+    if(min>max)
     {
       std::cout<<"Error en el programa"<<std::endl;
        std::exit(EXIT_FAILURE);
@@ -40,7 +41,7 @@ Calentador::Calentador(int min,int max,int Temperatura=0) //codigo del construct
     this->max=max;
 }
 
-void Calentador::calentar()
+void Calentador::operator++()
 {
     if(Temperatura+Incremento<=this->max)
     {
@@ -60,11 +61,12 @@ int main()
 {
     //try
     //{
-        Calentador c1{-10,10};
-        Calentador c2{0,30,-10};
+    ++c1;
+        Calentador c1{-10,10,13};
+        Calentador c2{0,30,10};
     
    
-        c1.calentar();
+        c1.operator++();
         c1.imprimeCentigrados();
         c1.imprimeFarenheit();
     
@@ -72,6 +74,13 @@ int main()
         c2.enfriar();
         c2.imprimeCentigrados();
         c2.imprimeFarenheit();
+        
+        if(c1==c2)
+        {
+            std::cout<<"iguales\n";
+        }
+        else
+            std::cout<<"distintos\n";
         
     //} //catch(const std::runtime_error &e);
 }
@@ -90,4 +99,16 @@ void Calentador::imprimeFarenheit() const
 {
     float farenheit=Temperatura*1.8+32;
     std::cout<<"La temperatura en Farenheit es: "<<farenheit<<"°F"<<std::endl;
+}
+
+bool Calentador::operator==(Calentador otro)
+{
+    if(this->Temperatura==otro.Temperatura)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
