@@ -61,12 +61,13 @@ int main()
 {
     //try
     //{
-    ++c1;
+    
+    
         Calentador c1{-10,10,13};
         Calentador c2{0,30,10};
     
    
-        c1.operator++();
+        ++c1;
         c1.imprimeCentigrados();
         c1.imprimeFarenheit();
     
