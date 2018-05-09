@@ -1,10 +1,16 @@
 # include <iostream>
 
+
+
 class Fraccion
 {
     private:
         int numerador;
         int denominador;
+        
+    friend void operator<<(std::ostream& salida,Fraccion ); //las funciones amigas permiten acceder a las variables privadas de la fraccion
+    friend void operator>>(std::istream& entrada,Fraccion&);
+    
         
     public:
         Fraccion(int numerador,int denominador);
@@ -13,7 +19,11 @@ class Fraccion
         Fraccion operator/(Fraccion dividido);
         Fraccion operator+(Fraccion sumado);
         Fraccion operator-(Fraccion restado);
+        
+    
 };
+
+
 
 Fraccion::Fraccion(int numerador,int denominador)
 {
@@ -68,15 +78,34 @@ Fraccion Fraccion::operator-(Fraccion restado)
     
 }
 
+
+
+void operator<<(std::ostream& salida, Fraccion f)
+{
+    salida<<f.numerador<<"/"<<f.denominador<<"\n";
+}
+
+void operator>>(std::istream& entrada, Fraccion& f)
+{
+   entrada>>f.numerador>>f.denominador;
+}
+
+
 int main()
 {
     
+    
     Fraccion f1(3,8);
     Fraccion f2(4,5);
+    
+    std::cin>>f1;
+    
     Fraccion resultado(0,0);
     
     resultado=f1*f2;
     resultado.imprimeFraccion();
+    std::cout<<resultado;
+ 
     
     resultado=f1/f2;
     resultado.imprimeFraccion();
@@ -87,3 +116,16 @@ int main()
     resultado=f1-f2;
     resultado.imprimeFraccion();
 }
+
+
+/*
+void intercambia (int &a,&b)  //parametro por referencia
+{
+    int aux;
+    aux=a;
+    a=b;
+    b=aux;
+
+}
+intercambia (x,y) // para llamar
+*/
