@@ -1,23 +1,25 @@
 #include <iostream>
-template<typename Tipo>
+template <typename Tipo>
 
 class Pila{
+
+
    private:
-   int tope;
-   Tipo *arreglo;
-   int max;
+    int tope;
+    Tipo *arreglo;
+    int max;
    
    public:
-   Pila(int tam); //Constructor
-   ~Pila();       //Destructor
-   void Push(Tipo dato);
-   Tipo Pop();
+    Pila(int tam); //Constructor
+    ~Pila();       //Destructor
+    void Push(Tipo dato);
+    Tipo Pop();
 };
 
 template <typename Tipo>
 Pila::Pila(int tam)
 {
-   max=tama;
+   max=tam;
    tope=0;
    arreglo=new Tipo[max];
 }
@@ -31,14 +33,28 @@ Pila::~Pila()
 template <typename Tipo>
 void Pila::Push(Tipo dato)
 {
-    
+    if(tope<=max)
+    {
+        &arreglo[tope]=dato;
+        tope+=1;
+    }
+    else{
+        std::cout<<"Pila llena\n";
+        }
 }
 
 template <typename Tipo>
 Tipo Pila::Pop()
 {
-    
-    
+    if(tope>=1)
+    {
+        Tipo aux;
+        aux=arreglo[tope];
+        tope-=1;
+        return aux;
+    }
+    else{
+        std::cout<<"no hay datos para sacar\n";}
 }
 
 int main()
