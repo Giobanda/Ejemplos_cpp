@@ -17,7 +17,7 @@ class Pila{
 };
 
 template <typename Tipo>
-Pila::Pila(int tam)
+Pila<Tipo>::Pila(int tam)
 {
    max=tam;
    tope=0;
@@ -25,17 +25,17 @@ Pila::Pila(int tam)
 }
 
 template <typename Tipo>
-Pila::~Pila()
+Pila<Tipo>::~Pila()
 {
     delete []arreglo;
 }
 
 template <typename Tipo>
-void Pila::Push(Tipo dato)
+void Pila<Tipo>::Push(Tipo dato)
 {
     if(tope<=max)
     {
-        &arreglo[tope]=dato;
+        arreglo[tope]=dato;
         tope+=1;
     }
     else{
@@ -44,13 +44,14 @@ void Pila::Push(Tipo dato)
 }
 
 template <typename Tipo>
-Tipo Pila::Pop()
+Tipo Pila<Tipo>::Pop()
 {
     if(tope>=1)
     {
+        tope-=1;
         Tipo aux;
         aux=arreglo[tope];
-        tope-=1;
+        
         return aux;
     }
     else{
